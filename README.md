@@ -28,7 +28,7 @@ Si tienes Python instalado desde la **Microsoft Store**, Windows puede bloquear 
    ```powershell
    New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
-   # 1. Crear y activar el entorno virtual
+# 1. Crear y activar el entorno virtual (opcional)
 python -m venv C:\venv_bio
 C:\venv_bio\Scripts\activate
 
