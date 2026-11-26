@@ -305,7 +305,7 @@ def main():
     def _on_load_finished(ok):
         # Fase 0: en la PRIMERA carga se arregla localStorage para que el
         # movil apunte a 127.0.0.1:<puerto de esta PC>. Sin esto, el celular
-        # simulado podria conservar una IP vieja (otro PC o 192.168.x.x).
+        # simulado podria conservar una IP vieja (otro PC o <IP-DE-TU-PC>).
         # Fase 1: tras recargar, ya se lee el estado real de vinculacion.
         if state["phase"] == 0:
             # fijar la PC del movil a 127.0.0.1:<puerto> (misma sesion)

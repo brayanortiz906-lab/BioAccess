@@ -18,7 +18,7 @@ const CFG_KEY = 'bioaccess_mobile_cfg_v2';
 const LOG_KEY = 'bioaccess_mobile_log_v2';
 
 const DEFAULT_CFG = {
-  ip: (location.protocol === 'http:' && location.hostname) ? location.hostname : '192.168.1.50',
+  ip: (location.protocol === 'http:' && location.hostname && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1' && location.hostname !== 'bioaccess.local') ? location.hostname : '',
   port: (location.protocol === 'http:' && location.port) ? location.port : '8080',
   device: IS_APK ? 'Celular BioAccess' : 'Navegador',
   auto: true,
@@ -64,6 +64,7 @@ function wsProto()   { return isSecureHost() ? 'wss://'   : 'ws://';   }
 function hostPort()  { const p = (CFG.port || '').toString().trim(); return p ? (':' + p) : ''; }
 
 let CFG = Object.assign({}, DEFAULT_CFG, readJSON(CFG_KEY) || {});
+if (CFG.ip === '192.168.1.50') { CFG.ip = ''; saveCfg(); }
 if (!CFG.deviceId) { CFG.deviceId = 'dev-' + Math.random().toString(36).slice(2) + Date.now().toString(36); saveCfg(); }
 let LOG = readJSON(LOG_KEY) || [];
 
@@ -1084,7 +1085,7 @@ function boot() {
 
   // autodescubrimiento automatico si no hay IP conocida o es la IP por defecto
   if (CFG.auto) {
-    const needDiscover = !CFG.ip || CFG.ip === '192.168.1.50' || CFG.ip === '127.0.0.1';
+    const needDiscover = !CFG.ip;
     setTimeout(() => {
       if (needDiscover) { try { discover(); } catch (e) {} }
     }, 1500);

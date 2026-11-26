@@ -40,7 +40,7 @@ except OSError:
 CONFIG_FILE = os.path.join(CONFIG_DIR, "bioaccess_config.json")
 
 DEFAULT_CONFIG = {
-    "connection": {"ip": "192.168.1.50", "port": "8080", "username": "Usuario PC",
+    "connection": {"ip": "", "port": "8080", "username": "Usuario PC",
                    "auto_detect": True, "timeout": 5, "retry_attempts": 3},
     "network": {"server_enabled": True, "server_port": 8080, "auto_connect": True},
     "display": {"glow_intensity": 50, "animation_speed": 1.0, "particle_density": 120,

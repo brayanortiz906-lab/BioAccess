@@ -331,7 +331,7 @@ if __name__ == "__main__":                                                    # 
 | `view.setUrl(QUrl("http://127.0.0.1:%d/mobile/index.html" % port))` | La pantalla del "celular" carga el móvil real. | Cambiar el puerto → el móvil no encuentra al servidor. |
 | `state` dict | Memoria del simulador (fase, deviceId, ¿vinculado?). | Borrarlo → las funciones `_read_state`, `_pair`, `_on_load_finished` rompen. |
 | `_read_state()` | Pide al móvil (via JS) el `localStorage` `bioaccess_mobile_cfg_v2`: deviceId y si tiene token → pinta VINCULADO. | Borrarlo → el botón "VINCULADO" nunca se muestra. |
-| `_on_load_finished()` | Al cargar la página del móvil: **fase 0** = arregla la IP del móvil a 127.0.0.1 y recarga; **fase 1** = lee el estado. | Borrar la fase 0 → el móvil intenta conectar a la IP vieja (192.168.x.x) y falla. |
+| `_on_load_finished()` | Al cargar la página del móvil: **fase 0** = arregla la IP del móvil a 127.0.0.1 y recarga; **fase 1** = lee el estado. | Borrar la fase 0 → el móvil intenta conectar a la IP vieja (<IP-DE-TU-PC>) y falla. |
 | `_pair()` | **El botón VINCULAR**: llama `/api/pair/verify` como si fuera la APK → la PC abre el diálogo ACEPTAR → al aceptar, la PC da el token. | Borrado → no se puede vincular desde el simulador. |
 | `poll = QTimer()` cada 1500 ms | Cada 1.5 s vuelve a mirar si el móvil ya tiene token. | Borrarlo → el estado se queda desactualizado |
 | `pc.destroyed.connect(_quit)` | Cerrar la terminal PC apaga el servidor embebido y cierra todo. | Borrarlo → el servidor queda vivo en un hilo invisible (proceso zombie). |
