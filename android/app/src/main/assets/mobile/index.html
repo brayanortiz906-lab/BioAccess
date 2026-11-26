@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#01040a">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="app.css">
+<title>BioAccess Mobile v2.0</title>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div class="vignette"></div>
+
+<div id="app">
+
+  <!-- ============ HEADER ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">BIO<span>ACCESS</span></div>
+      <div class="sub">// MOVIL_v2.0</div>
+    </div>
+    <div class="status-chip" id="connChip">
+      <span class="dot" id="connDot"></span>
+      <span id="connText">OFFLINE</span>
+    </div>
+  </header>
+
+  <!-- ============ VIEWS ============ -->
+  <main>
+
+    <!-- ---------- SCANNER ---------- -->
+    <section class="view active" id="view-scan">
+      <h2 class="view-title">[ // SENSOR BIOMÉTRICO ]</h2>
+
+      <div class="peer-banner" id="peerBanner">
+        <div class="pb-line1">SOLICITUD DE LA PC</div>
+        <div class="pb-line2" id="pbText">PRESIONA EL SENSOR PARA AUTORIZAR</div>
+      </div>
+
+      <div class="stage">
+        <canvas id="hud"></canvas>
+        <div class="hud-tag" id="hudTag">ESCANEAR</div>
+      </div>
+
+      <div class="meter">
+        <div class="meter-fill" id="meterFill"></div>
+        <div class="meter-label" id="meterLabel">PROGRESO: 0%</div>
+      </div>
+
+      <button class="cyber-btn primary" id="btnScan">🔐 MANTENER PARA ESCANEAR</button>
+      <div class="hint" id="scanHint">&gt; MANTÉN PRESIONADO EL SENSOR_</div>
+    </section>
+
+    <!-- ---------- HISTORY ---------- -->
+    <section class="view" id="view-hist">
+      <h2 class="view-title">[ // REGISTRO DE EVENTOS ]</h2>
+      <div class="log-wrap">
+        <ul class="log" id="histList"></ul>
+      </div>
+      <button class="cyber-btn danger" id="btnClearHist">🗑️ LIMPIAR HISTORIAL</button>
+    </section>
+
+    <!-- ---------- SETTINGS ---------- -->
+    <section class="view" id="view-cfg">
+      <h2 class="view-title">[ // CONFIGURACIÓN ]</h2>
+      <div class="cfg-scroll">
+
+        <fieldset class="group">
+          <legend>CONEXIÓN CON LA PC</legend>
+          <label class="row"><span>IP de la PC</span><input id="inpIp" type="text" inputmode="decimal" placeholder="Se detecta sola (BUSCAR PC)"></label>
+          <label class="row"><span>Puerto</span><input id="inpPort" type="number" placeholder="8080"></label>
+          <label class="row"><span>Nombre del dispositivo</span><input id="inpDevice" type="text" placeholder="Mi Celular"></label>
+          <label class="row check"><input id="chkAuto" type="checkbox"><span>Detección automática (LAN)</span></label>
+          <button class="cyber-btn small" id="btnDiscover">📡 BUSCAR PC EN LA RED</button>
+          <button class="cyber-btn small" id="btnQr">⬛ ESCANEAR QR DE LA PC</button>
+          <button class="cyber-btn small" id="btnUsb">🔌 VINCULAR POR USB</button>
+          <button class="cyber-btn small" id="btnForget">🗑 OLVIDAR ESTA PC</button>
+          <div class="hint" id="discoverHint">&gt; LISTO PARA BUSCAR_</div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>ESCÁNER</legend>
+          <label class="row"><span>Sensibilidad</span><input id="inpSens" type="range" min="10" max="100" value="50"><b id="lblSens">50%</b></label>
+          <label class="row"><span>Tiempo de escaneo</span><input id="inpTime" type="range" min="1" max="8" value="3"><b id="lblTime">3s</b></label>
+          <label class="row check"><input id="chkBiometric" type="checkbox" checked><span>Usar huella real del celular</span></label>
+          <label class="row check"><input id="chkHaptic" type="checkbox" checked><span>Vibración (haptico)</span></label>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>AUDIO</legend>
+          <label class="row check"><input id="chkAudio" type="checkbox" checked><span>Habilitar sonidos</span></label>
+          <label class="row"><span>Volumen</span><input id="inpVol" type="range" min="0" max="100" value="70"><b id="lblVol">70%</b></label>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>SEGURIDAD</legend>
+          <label class="row check"><input id="chkPin" type="checkbox"><span>Pedir PIN al abrir</span></label>
+          <label class="row"><span>PIN (4-8 dígitos)</span><input id="inpPin" type="password" inputmode="numeric" placeholder="****"></label>
+          <label class="row check"><input id="chkPinReq" type="checkbox"><span>Pedir PIN en cada solicitud de la PC</span></label>
+        </fieldset>
+
+        <div class="cfg-info" id="devInfo"></div>
+      </div>
+      <button class="cyber-btn primary" id="btnSave">💾 GUARDAR CONFIGURACIÓN</button>
+    </section>
+
+  </main>
+
+  <!-- ============ BOTTOM NAV ============ -->
+  <nav class="tabbar">
+    <button class="tab active" data-view="scan"><i>◉</i><span>ESCÁNER</span></button>
+    <button class="tab" data-view="hist"><i>≡</i><span>HISTORIAL</span></button>
+    <button class="tab" data-view="cfg"><i>⚙</i><span>AJUSTES</span></button>
+  </nav>
+
+</div>
+
+<!-- ============ PIN MODAL ============ -->
+<div class="modal" id="pinModal">
+  <div class="modal-box">
+    <div class="modal-title">🔒 VERIFICACIÓN DE SEGURIDAD</div>
+    <input id="pinInput" type="password" inputmode="numeric" placeholder="****" autocomplete="off">
+    <div class="modal-msg" id="pinMsg"></div>
+    <div class="modal-btns">
+      <button class="cyber-btn small primary" id="pinOk">CONFIRMAR</button>
+      <button class="cyber-btn small danger" id="pinCancel">CANCELAR</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

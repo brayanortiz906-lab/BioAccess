@@ -1,0 +1,32 @@
+﻿# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Builds / binaries ---
+build/
+dist/
+*.exe
+*.apk
+*.rar
+*.zip
+
+# --- Android build intermediates ---
+android/build/
+android/.gradle/
+android/local.properties
+android/app/build/
+
+# --- Datos personales / runtime (NO subir) ---
+trusted_devices.json
+pc_identity.json
+bioaccess_events.json
+bioaccess_config.json
+*.keystore
+
+# --- Editor / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
