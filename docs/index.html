@@ -4,29 +4,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BioAccess — Terminal Biométrico PC + Móvil</title>
-<meta name="description" content="Sistema de control de acceso por huella para PC y celular, con interfaz cyberpunk.">
+<meta name="description" content="BioAccess: control de acceso por huella para PC y celular. Interfaz cyberpunk, vinculación segura, APK y simulador portable.">
+<meta name="keywords" content="BioAccess, biometrico, huella, PC, movil, cyberpunk, PyQt6, FastAPI, WebSocket">
+<meta name="author" content="Brayan Alejandro Ortiz Calle">
+<link rel="canonical" href="https://brayanortiz906-lab.github.io/BioAccess/">
+<link rel="icon" href="assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BioAccess — Terminal Biométrico PC + Móvil">
+<meta property="og:description" content="Control de acceso por huella para PC y celular con interfaz cyberpunk.">
+<meta property="og:url" content="https://brayanortiz906-lab.github.io/BioAccess/">
+<meta property="og:image" content="https://brayanortiz906-lab.github.io/BioAccess/assets/pc-terminal.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BioAccess — Terminal Biométrico PC + Móvil">
+<meta name="twitter:description" content="Control de acceso por huella para PC y celular con interfaz cyberpunk.">
+<meta name="twitter:image" content="https://brayanortiz906-lab.github.io/BioAccess/assets/pc-terminal.png">
 <style>
-:root{--bg:#030712;--panel:#0a1020;--neon:#00f5ff;--magenta:#ff2bd6;--green:#39ff14;--text:#d9faff;--muted:#7fa6b8;--border:rgba(0,245,255,.25)}
+:root{--bg:#030712;--panel:#0a1020;--neon:#00f5ff;--magenta:#ff2bd6;--green:#39ff14;--text:#d9faff;--muted:#7fa6b8;--border:rgba(0,245,255,.25);--danger:#ff5f56}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:radial-gradient(circle at 20% 10%,#0b1f3a 0%,#030712 45%),radial-gradient(circle at 80% 80%,#1a0b2e 0%,#030712 50%);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,rgba(0,245,255,.03) 0 1px,transparent 1px 3px);pointer-events:none;z-index:0}
-.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:24px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px}
 .logo{font-weight:900;letter-spacing:2px;font-size:1.2rem}.logo span{color:var(--neon);text-shadow:0 0 12px var(--neon)}
-.navlinks a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:.9rem}.navlinks a:hover{color:var(--neon)}
-.hero{padding:70px 0 40px;text-align:center}
+.navlinks a{color:var(--muted);text-decoration:none;margin:0 10px;font-size:.9rem}.navlinks a:hover{color:var(--neon)}
+.lang-btn{background:rgba(0,245,255,.08);border:1px solid var(--border);color:var(--neon);padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+.hero{padding:70px 0 40px;text-align:center;position:relative}
+#particles{position:absolute;inset:0;opacity:.55;pointer-events:none}
 .badge{display:inline-block;padding:6px 12px;border:1px solid var(--neon);border-radius:999px;color:var(--neon);font-size:.75rem;letter-spacing:1.5px;margin:4px;box-shadow:0 0 12px rgba(0,245,255,.25)}
 h1{font-size:clamp(2.2rem,6vw,4.2rem);margin:18px 0 10px;letter-spacing:3px;text-shadow:0 0 24px var(--neon)}
 h1 span{color:var(--magenta);text-shadow:0 0 24px var(--magenta)}
-.lead{max-width:760px;margin:0 auto;color:var(--muted);font-size:1.1rem;line-height:1.6}
+.lead{max-width:780px;margin:0 auto;color:var(--muted);font-size:1.1rem;line-height:1.6;min-height:3.2em}
 .cta{margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn{padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700;letter-spacing:1px;transition:.2s;display:inline-block}
+.btn{padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700;letter-spacing:1px;transition:.2s;display:inline-block;border:none;cursor:pointer}
 .btn.primary{background:linear-gradient(135deg,var(--neon),#00a8ff);color:#001018;box-shadow:0 0 22px rgba(0,245,255,.45)}
 .btn.ghost{border:1px solid var(--magenta);color:var(--magenta);background:rgba(255,43,214,.06)}
 .btn:hover{transform:translateY(-2px)}
 .section{margin:70px 0}
 .section h2{font-size:1.9rem;letter-spacing:2px;margin-bottom:10px;text-shadow:0 0 14px rgba(0,245,255,.35)}
-.section p{color:var(--muted);line-height:1.7;max-width:860px}
+.section p{color:var(--muted);line-height:1.7;max-width:900px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:24px}
 .card{background:linear-gradient(180deg,rgba(10,16,32,.9),rgba(5,8,18,.9));border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden;transition:.25s}
 .card::after{content:'';position:absolute;inset:auto -40% -40% auto;width:160px;height:160px;background:radial-gradient(circle,var(--neon) 0%,transparent 70%);opacity:.08}
@@ -51,8 +66,32 @@ h1 span{color:var(--magenta);text-shadow:0 0 24px var(--magenta)}
 .phone .hud{height:120px;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;background:radial-gradient(circle,#00f5ff22,transparent)}
 .phone .btn{background:var(--neon);color:#001018;padding:8px;border-radius:8px;text-align:center;font-size:.75rem;font-weight:700}
 .links a{color:var(--neon);text-decoration:none;display:block;margin:6px 0}.links a:hover{text-decoration:underline}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px}
+.gallery img{width:100%;border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:.2s;loading:lazy}
+.gallery img:hover{transform:scale(1.02);border-color:var(--neon);box-shadow:0 0 18px rgba(0,245,255,.25)}
+.lightbox{position:fixed;inset:0;background:rgba(2,6,15,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;border:1px solid var(--neon);box-shadow:0 0 40px rgba(0,245,255,.35)}
+.lightbox .close{position:absolute;top:18px;right:24px;color:var(--neon);font-size:2rem;cursor:pointer}
+.stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px}
+.stat{background:rgba(0,245,255,.06);border:1px solid var(--border);border-radius:12px;padding:12px 16px;min-width:150px}
+.stat b{color:var(--neon);font-size:1.4rem;display:block}
+.arch svg{width:100%;height:auto}
+.arch .node{fill:rgba(10,16,32,.9);stroke:var(--neon);stroke-width:2}
+.arch .label{fill:var(--text);font-size:14px;font-family:Consolas,monospace}
+.arch .line{stroke:var(--magenta);stroke-width:2;stroke-dasharray:6 6;animation:dash 2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+details{background:rgba(0,245,255,.04);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin:10px 0}
+details summary{cursor:pointer;color:var(--neon);font-weight:700}
+details pre{white-space:pre-wrap;color:var(--muted);font-size:.85rem;margin-top:10px}
+.tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.tabbtn{background:rgba(0,245,255,.06);border:1px solid var(--border);color:var(--muted);padding:8px 14px;border-radius:8px;cursor:pointer}
+.tabbtn.active{color:var(--neon);border-color:var(--neon);box-shadow:0 0 12px rgba(0,245,255,.2)}
+.tabpanel{display:none}.tabpanel.active{display:block}
+.download-card{background:linear-gradient(180deg,rgba(10,16,32,.9),rgba(5,8,18,.9));border:1px solid var(--border);border-radius:14px;padding:20px;margin-top:16px}
+.download-card code{color:var(--green);font-family:Consolas,monospace;font-size:.85rem}
 footer{margin:70px 0 20px;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:20px}
-@media(max-width:760px){.mocks{grid-template-columns:1fr}}
+@media(max-width:760px){.mocks{grid-template-columns:1fr}.hero{padding:40px 0 20px}}
+@media (prefers-reduced-motion: reduce){.arch .line{animation:none}#particles{display:none}}
 </style>
 </head>
 <body>
@@ -60,64 +99,92 @@ footer{margin:70px 0 20px;text-align:center;color:var(--muted);font-size:.85rem;
 <nav>
   <div class="logo">BIO<span>ACCESS</span></div>
   <div class="navlinks">
-    <a href="#como">Cómo funciona</a>
-    <a href="#conecta">Conexión</a>
-    <a href="#galeria">Galería</a>
-    <a href="#descargas">Descargas</a>
+    <a href="#como" data-i18n="nav_how">Cómo funciona</a>
+    <a href="#conecta" data-i18n="nav_conn">Conexión</a>
+    <a href="#arq" data-i18n="nav_arch">Arquitectura</a>
+    <a href="#galeria" data-i18n="nav_gallery">Galería</a>
+    <a href="#docs" data-i18n="nav_docs">Docs</a>
+    <a href="#descargas" data-i18n="nav_downloads">Descargas</a>
     <a href="https://github.com/brayanortiz906-lab/BioAccess">GitHub</a>
   </div>
+  <button class="lang-btn" id="langBtn">EN</button>
 </nav>
 
 <section class="hero">
+  <canvas id="particles"></canvas>
   <div>
-    <span class="badge">PC + MÓVIL</span>
-    <span class="badge">BIOMÉTRICO</span>
-    <span class="badge">CYBERPUNK</span>
+    <span class="badge" data-i18n="badge1">PC + MÓVIL</span>
+    <span class="badge" data-i18n="badge2">BIOMÉTRICO</span>
+    <span class="badge" data-i18n="badge3">CYBERPUNK</span>
   </div>
   <h1>BIO<span>ACCESS</span></h1>
-  <p class="lead">Sistema de control de acceso por huella para PC y celular. La PC gestiona, el celular autoriza, y ambos se vinculan de forma segura en la misma red.</p>
+  <p class="lead" id="typing"></p>
   <div class="cta">
-    <a class="btn primary" href="https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobile.apk">Descargar APK</a>
-    <a class="btn ghost" href="https://github.com/brayanortiz906-lab/BioAccess">Ver código</a>
+    <a class="btn primary" href="https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobile.apk" data-i18n="btn_apk">Descargar APK</a>
+    <a class="btn ghost" href="https://github.com/brayanortiz906-lab/BioAccess" data-i18n="btn_code">Ver código</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="stars">-</b><span data-i18n="stat_stars">Estrellas GitHub</span></div>
+    <div class="stat"><b>v1.0.0</b><span data-i18n="stat_version">Versión actual</span></div>
+    <div class="stat"><b>Android 9+</b><span data-i18n="stat_android">Compatibilidad</span></div>
   </div>
 </section>
 
 <section class="section" id="que">
-  <h2>// QUÉ ES</h2>
-  <p>BioAccess es un sistema de acceso biométrico que une una terminal de escritorio con un celular. La PC envía una solicitud, el celular captura la huella y, si es válida, la PC concede el acceso.</p>
+  <h2 data-i18n="sec_what">/ QUÉ ES</h2>
+  <p data-i18n="sec_what_p">BioAccess es un sistema de acceso biométrico que une una terminal de escritorio con un celular. La PC envía una solicitud, el celular captura la huella y, si es válida, la PC concede el acceso.</p>
   <div class="grid">
-    <div class="card"><h3>Terminal PC</h3><p>Interfaz cyberpunk, servidor embebido, vinculación y aprobación de dispositivos.</p></div>
-    <div class="card"><h3>App móvil</h3><p>Escáner biométrico real o simulado, historial, ajustes y vinculación por QR, código o USB.</p></div>
-    <div class="card"><h3>Servidor</h3><p>FastAPI + WebSocket + descubrimiento UDP para encontrar la PC en la red.</p></div>
-    <div class="card"><h3>Simulador</h3><p>Un solo archivo Python que reproduce todo el sistema en una sola PC.</p></div>
+    <div class="card"><h3 data-i18n="card_pc">Terminal PC</h3><p data-i18n="card_pc_p">Interfaz cyberpunk, servidor embebido, vinculación y aprobación de dispositivos.</p></div>
+    <div class="card"><h3 data-i18n="card_mobile">App móvil</h3><p data-i18n="card_mobile_p">Escáner biométrico real o simulado, historial, ajustes y vinculación por QR, código o USB.</p></div>
+    <div class="card"><h3 data-i18n="card_server">Servidor</h3><p data-i18n="card_server_p">FastAPI + WebSocket + descubrimiento UDP para encontrar la PC en la red.</p></div>
+    <div class="card"><h3 data-i18n="card_sim">Simulador</h3><p data-i18n="card_sim_p">Un solo archivo Python que reproduce todo el sistema en una sola PC.</p></div>
   </div>
 </section>
 
 <section class="section" id="como">
-  <h2>// CÓMO FUNCIONA</h2>
+  <h2 data-i18n="sec_how">/ CÓMO FUNCIONA</h2>
   <div class="flow">
-    <div class="step"><div class="n">01</div><p>La PC inicia el servidor y muestra su IP.</p></div>
-    <div class="step"><div class="n">02</div><p>El celular busca la PC en la red.</p></div>
-    <div class="step"><div class="n">03</div><p>Se vinculan por QR, código o USB.</p></div>
-    <div class="step"><div class="n">04</div><p>La PC solicita huella.</p></div>
-    <div class="step"><div class="n">05</div><p>El celular valida y responde.</p></div>
-    <div class="step"><div class="n">06</div><p>Acceso concedido o denegado.</p></div>
+    <div class="step"><div class="n">01</div><p data-i18n="step1">La PC inicia el servidor y muestra su IP.</p></div>
+    <div class="step"><div class="n">02</div><p data-i18n="step2">El celular busca la PC en la red.</p></div>
+    <div class="step"><div class="n">03</div><p data-i18n="step3">Se vinculan por QR, código o USB.</p></div>
+    <div class="step"><div class="n">04</div><p data-i18n="step4">La PC solicita huella.</p></div>
+    <div class="step"><div class="n">05</div><p data-i18n="step5">El celular valida y responde.</p></div>
+    <div class="step"><div class="n">06</div><p data-i18n="step6">Acceso concedido o denegado.</p></div>
   </div>
 </section>
 
 <section class="section" id="conecta">
-  <h2>// CÓMO SE CONECTA</h2>
-  <p>La PC detecta automáticamente su IP local. El celular se conecta por los mismos canales:</p>
+  <h2 data-i18n="sec_conn">/ CÓMO SE CONECTA</h2>
+  <p data-i18n="sec_conn_p">La PC detecta automáticamente su IP local. El celular se conecta por los mismos canales:</p>
   <div class="proto">
-    <div class="p"><b>HTTP</b><br>Sirve la app móvil y los datos de la PC.</div>
-    <div class="p"><b>WebSocket</b><br>Comunicación en tiempo real entre PC y celular.</div>
-    <div class="p"><b>UDP 8089</b><br>Descubrimiento automático de la PC en la LAN.</div>
-    <div class="p"><b>QR / Código</b><br>Vinculación segura con código de 6 caracteres.</div>
+    <div class="p"><b>HTTP</b><br><span data-i18n="proto_http">Sirve la app móvil y los datos de la PC.</span></div>
+    <div class="p"><b>WebSocket</b><br><span data-i18n="proto_ws">Comunicación en tiempo real entre PC y celular.</span></div>
+    <div class="p"><b>UDP 8089</b><br><span data-i18n="proto_udp">Descubrimiento automático de la PC en la LAN.</span></div>
+    <div class="p"><b>QR / Código</b><br><span data-i18n="proto_qr">Vinculación segura con código de 6 caracteres.</span></div>
+  </div>
+</section>
+
+<section class="section" id="arq">
+  <h2 data-i18n="sec_arch">/ ARQUITECTURA</h2>
+  <div class="arch">
+    <svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="70" width="180" height="120" rx="14" class="node"/>
+      <text x="130" y="125" text-anchor="middle" class="label">Terminal PC</text>
+      <text x="130" y="148" text-anchor="middle" class="label">PyQt6</text>
+      <rect x="360" y="70" width="180" height="120" rx="14" class="node"/>
+      <text x="450" y="125" text-anchor="middle" class="label">Servidor</text>
+      <text x="450" y="148" text-anchor="middle" class="label">FastAPI / WS</text>
+      <rect x="680" y="70" width="180" height="120" rx="14" class="node"/>
+      <text x="770" y="125" text-anchor="middle" class="label">Celular</text>
+      <text x="770" y="148" text-anchor="middle" class="label">APK / Web</text>
+      <line x1="220" y1="130" x2="360" y2="130" class="line"/>
+      <line x1="540" y1="130" x2="680" y2="130" class="line"/>
+    </svg>
   </div>
 </section>
 
 <section class="section" id="apariencia">
-  <h2>// APARIENCIA</h2>
+  <h2 data-i18n="sec_ui">/ APARIENCIA</h2>
   <div class="mocks">
     <div class="term">
       <div class="bar"><span class="dot red"></span><span class="dot yel"></span><span class="dot grn"></span></div>
@@ -131,41 +198,190 @@ footer{margin:70px 0 20px;text-align:center;color:var(--muted);font-size:.85rem;
       <div class="screen">
         <div class="title">BIOACCESS MOBILE</div>
         <div class="hud"></div>
-        <div class="btn">MANTENER PARA ESCANEAR</div>
+        <div class="btn" data-i18n="btn_scan">MANTENER PARA ESCANEAR</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="descargas">
-  <h2>// DESCARGAS Y DOCUMENTACIÓN</h2>
-  <div class="links">
-    <a href="https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobile.apk">Descargar APK móvil</a>
-    <a href="https://github.com/brayanortiz906-lab/BioAccess">Repositorio en GitHub</a>
-    <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/COMO_FUNCIONA.md">Cómo funciona</a>
-    <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/COMO_FUNCIONA_CONEXION.md">Cómo se conecta</a>
-    <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/README_BIOACCESS.md">Manual de uso</a>
-  </div>
-</section>
-
-
 <section class="section" id="galeria">
-  <h2>// GALERIA</h2>
-  <p>Capturas del sistema (interfaz cyberpunk).</p>
-  <div class="mocks">
-    <div><img src="assets/pc-terminal.png" alt="Terminal PC" style="width:100%;border-radius:12px;border:1px solid var(--neon);box-shadow:0 0 24px rgba(0,245,255,.25)"></div>
-    <div><img src="assets/mobile-app.png" alt="App movil" style="width:100%;border-radius:12px;border:1px solid var(--magenta);box-shadow:0 0 24px rgba(255,43,214,.25)"></div>
+  <h2 data-i18n="sec_gallery">/ GALERÍA</h2>
+  <p data-i18n="sec_gallery_p">Capturas del sistema (interfaz cyberpunk). Haz clic para ampliar.</p>
+  <div class="gallery">
+    <img src="assets/pc-terminal.png" alt="Terminal PC" loading="lazy">
+    <img src="assets/mobile-app.png" alt="App móvil" loading="lazy">
+    <img src="assets/bioaccess-demo.gif" alt="Demo animada" loading="lazy">
   </div>
 </section>
+
+<section class="section" id="docs">
+  <h2 data-i18n="sec_docs">/ DOCUMENTACIÓN</h2>
+  <div class="tabs">
+    <button class="tabbtn active" data-tab="readme" data-i18n="tab_readme">README</button>
+    <button class="tabbtn" data-tab="how" data-i18n="tab_how">Cómo funciona</button>
+    <button class="tabbtn" data-tab="conn" data-i18n="tab_conn">Conexión</button>
+  </div>
+  <div class="tabpanel active" id="tab-readme">
+    <details open><summary data-i18n="doc_readme">Manual de uso</summary><pre>python bioaccess.py
+python bioaccess_server.py --port 8080
+# APK: ver Releases</pre></details>
+  </div>
+  <div class="tabpanel" id="tab-how">
+    <details open><summary data-i18n="doc_how">Flujo general</summary><pre>1. La PC inicia el servidor
+2. El celular busca la PC
+3. Se vinculan por QR/código/USB
+4. La PC solicita huella
+5. El celular valida y responde
+6. Acceso concedido o denegado</pre></details>
+  </div>
+  <div class="tabpanel" id="tab-conn">
+    <details open><summary data-i18n="doc_conn">Canales</summary><pre>HTTP: sirve la app y datos
+WebSocket: tiempo real
+UDP 8089: descubrimiento
+QR/Código: vinculación segura</pre></details>
+  </div>
+  <div class="links">
+    <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/COMO_FUNCIONA.md">Cómo funciona (completo)</a>
+    <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/COMO_FUNCIONA_CONEXION.md">Cómo se conecta (completo)</a>
+    <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/README_BIOACCESS.md">Manual de uso (completo)</a>
+  </div>
+</section>
+
+<section class="section" id="descargas">
+  <h2 data-i18n="sec_downloads">/ DESCARGAS</h2>
+  <div class="download-card">
+    <p><b data-i18n="dl_version">Versión:</b> v1.0.0</p>
+    <p><b data-i18n="dl_size">Tamaño:</b> ~409 KB</p>
+    <p><b>SHA-256:</b> <code>6f421417d5edcad25d0a594d109a54d91c24b73176d89444cafdab8aebabaa90</code></p>
+    <p data-i18n="dl_steps">Pasos: descarga el APK → instala en Android (permitir orígenes desconocidos) → abre BioAccess → busca la PC.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobile.apk" data-i18n="btn_apk">Descargar APK</a>
+      <a class="btn ghost" href="https://github.com/brayanortiz906-lab/BioAccess" data-i18n="btn_code">Ver código</a>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="referencias">
-  <h2>// REFERENCIAS DEL TRABAJO</h2>
-  <p>Desarrollado con Python, PyQt6, FastAPI, uvicorn, WebSockets, qrcode, Android BiometricPrompt, ZXing y PyQt6-WebEngine. Incluye terminal PC, app móvil, servidor embebido, APK nativa, instalador y simulador portable.</p>
+  <h2 data-i18n="sec_refs">/ REFERENCIAS</h2>
+  <p data-i18n="sec_refs_p">Desarrollado con Python, PyQt6, FastAPI, uvicorn, WebSockets, qrcode, Android BiometricPrompt, ZXing y PyQt6-WebEngine. Incluye terminal PC, app móvil, servidor embebido, APK nativa, instalador y simulador portable.</p>
 </section>
 
 <footer>
   BioAccess — Terminal Biométrico PC + Móvil · Brayan Alejandro Ortiz Calle
 </footer>
 </div>
+
+<div class="lightbox" id="lightbox"><span class="close" id="lbClose">&times;</span><img id="lbImg" src="" alt=""></div>
+
+<script>
+const i18n = {
+  es: {
+    nav_how:"Cómo funciona", nav_conn:"Conexión", nav_arch:"Arquitectura", nav_gallery:"Galería", nav_docs:"Docs", nav_downloads:"Descargas",
+    badge1:"PC + MÓVIL", badge2:"BIOMÉTRICO", badge3:"CYBERPUNK",
+    typing:"Sistema de control de acceso por huella para PC y celular. La PC gestiona, el celular autoriza, y ambos se vinculan de forma segura en la misma red.",
+    btn_apk:"Descargar APK", btn_code:"Ver código", btn_scan:"MANTENER PARA ESCANEAR",
+    stat_stars:"Estrellas GitHub", stat_version:"Versión actual", stat_android:"Compatibilidad",
+    sec_what:"/ QUÉ ES", sec_what_p:"BioAccess es un sistema de acceso biométrico que une una terminal de escritorio con un celular. La PC envía una solicitud, el celular captura la huella y, si es válida, la PC concede el acceso.",
+    card_pc:"Terminal PC", card_pc_p:"Interfaz cyberpunk, servidor embebido, vinculación y aprobación de dispositivos.",
+    card_mobile:"App móvil", card_mobile_p:"Escáner biométrico real o simulado, historial, ajustes y vinculación por QR, código o USB.",
+    card_server:"Servidor", card_server_p:"FastAPI + WebSocket + descubrimiento UDP para encontrar la PC en la red.",
+    card_sim:"Simulador", card_sim_p:"Un solo archivo Python que reproduce todo el sistema en una sola PC.",
+    sec_how:"/ CÓMO FUNCIONA", step1:"La PC inicia el servidor y muestra su IP.", step2:"El celular busca la PC en la red.", step3:"Se vinculan por QR, código o USB.", step4:"La PC solicita huella.", step5:"El celular valida y responde.", step6:"Acceso concedido o denegado.",
+    sec_conn:"/ CÓMO SE CONECTA", sec_conn_p:"La PC detecta automáticamente su IP local. El celular se conecta por los mismos canales:",
+    proto_http:"Sirve la app móvil y los datos de la PC.", proto_ws:"Comunicación en tiempo real entre PC y celular.", proto_udp:"Descubrimiento automático de la PC en la LAN.", proto_qr:"Vinculación segura con código de 6 caracteres.",
+    sec_arch:"/ ARQUITECTURA", sec_ui:"/ APARIENCIA", sec_gallery:"/ GALERÍA", sec_gallery_p:"Capturas del sistema (interfaz cyberpunk). Haz clic para ampliar.",
+    sec_docs:"/ DOCUMENTACIÓN", tab_readme:"README", tab_how:"Cómo funciona", tab_conn:"Conexión", doc_readme:"Manual de uso", doc_how:"Flujo general", doc_conn:"Canales",
+    sec_downloads:"/ DESCARGAS", dl_version:"Versión:", dl_size:"Tamaño:", dl_steps:"Pasos: descarga el APK → instala en Android (permitir orígenes desconocidos) → abre BioAccess → busca la PC.",
+    sec_refs:"/ REFERENCIAS", sec_refs_p:"Desarrollado con Python, PyQt6, FastAPI, uvicorn, WebSockets, qrcode, Android BiometricPrompt, ZXing y PyQt6-WebEngine. Incluye terminal PC, app móvil, servidor embebido, APK nativa, instalador y simulador portable."
+  },
+  en: {
+    nav_how:"How it works", nav_conn:"Connection", nav_arch:"Architecture", nav_gallery:"Gallery", nav_docs:"Docs", nav_downloads:"Downloads",
+    badge1:"PC + MOBILE", badge2:"BIOMETRIC", badge3:"CYBERPUNK",
+    typing:"Biometric access control system for PC and phone. The PC manages, the phone authorizes, and both link securely on the same network.",
+    btn_apk:"Download APK", btn_code:"View code", btn_scan:"HOLD TO SCAN",
+    stat_stars:"GitHub stars", stat_version:"Current version", stat_android:"Compatibility",
+    sec_what:"/ WHAT IT IS", sec_what_p:"BioAccess is a biometric access system that connects a desktop terminal with a phone. The PC sends a request, the phone captures the fingerprint, and if valid, access is granted.",
+    card_pc:"PC Terminal", card_pc_p:"Cyberpunk UI, embedded server, device pairing and approval.",
+    card_mobile:"Mobile app", card_mobile_p:"Real or simulated biometric scan, history, settings and QR/code/USB pairing.",
+    card_server:"Server", card_server_p:"FastAPI + WebSocket + UDP discovery to find the PC on the network.",
+    card_sim:"Simulator", card_sim_p:"A single Python file that reproduces the whole system on one PC.",
+    sec_how:"/ HOW IT WORKS", step1:"The PC starts the server and shows its IP.", step2:"The phone searches for the PC on the network.", step3:"They pair via QR, code or USB.", step4:"The PC requests a fingerprint.", step5:"The phone validates and responds.", step6:"Access granted or denied.",
+    sec_conn:"/ HOW IT CONNECTS", sec_conn_p:"The PC auto-detects its local IP. The phone connects through the same channels:",
+    proto_http:"Serves the mobile app and PC data.", proto_ws:"Real-time communication between PC and phone.", proto_udp:"Automatic PC discovery on the LAN.", proto_qr:"Secure pairing with a 6-character code.",
+    sec_arch:"/ ARCHITECTURE", sec_ui:"/ APPEARANCE", sec_gallery:"/ GALLERY", sec_gallery_p:"System screenshots (cyberpunk UI). Click to enlarge.",
+    sec_docs:"/ DOCUMENTATION", tab_readme:"README", tab_how:"How it works", tab_conn:"Connection", doc_readme:"Usage manual", doc_how:"General flow", doc_conn:"Channels",
+    sec_downloads:"/ DOWNLOADS", dl_version:"Version:", dl_size:"Size:", dl_steps:"Steps: download the APK → install on Android (allow unknown sources) → open BioAccess → find the PC.",
+    sec_refs:"/ REFERENCES", sec_refs_p:"Built with Python, PyQt6, FastAPI, uvicorn, WebSockets, qrcode, Android BiometricPrompt, ZXing and PyQt6-WebEngine. Includes PC terminal, mobile app, embedded server, native APK, installer and portable simulator."
+  }
+};
+let lang = 'es';
+function applyLang() {
+  const dict = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) el.textContent = dict[key];
+  });
+  document.getElementById('langBtn').textContent = lang === 'es' ? 'EN' : 'ES';
+  document.documentElement.lang = lang;
+}
+document.getElementById('langBtn').addEventListener('click', () => { lang = lang === 'es' ? 'en' : 'es'; applyLang(); });
+
+// typing effect
+const typingEl = document.getElementById('typing');
+const typingText = i18n.es.typing;
+let ti = 0;
+function type() {
+  if (ti <= typingText.length) { typingEl.textContent = typingText.slice(0, ti); ti++; setTimeout(type, 24); }
+}
+type();
+
+// particles
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let parts = [];
+function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+function initParts() {
+  parts = [];
+  for (let i=0;i<90;i++) parts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,r:Math.random()*1.6+0.4});
+}
+function drawParts() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  parts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if (p.x<0||p.x>canvas.width) p.vx*=-1;
+    if (p.y<0||p.y>canvas.height) p.vy*=-1;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(0,245,255,.7)'; ctx.fill();
+  });
+  requestAnimationFrame(drawParts);
+}
+resize(); initParts(); drawParts();
+window.addEventListener('resize',()=>{resize();initParts();});
+
+// tabs
+document.querySelectorAll('.tabbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+// lightbox
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+document.querySelectorAll('.gallery img').forEach(img=>{
+  img.addEventListener('click',()=>{lbImg.src=img.src; lb.style.display='flex';});
+});
+document.getElementById('lbClose').addEventListener('click',()=>{lb.style.display='none';});
+lb.addEventListener('click',e=>{if(e.target===lb) lb.style.display='none';});
+
+// github stars
+fetch('https://api.github.com/repos/brayanortiz906-lab/BioAccess')
+  .then(r=>r.json()).then(j=>{ const s=document.getElementById('stars'); if (s && typeof j.stargazers_count==='number') s.textContent=j.stargazers_count; })
+  .catch(()=>{});
+
+applyLang();
+</script>
 </body>
 </html>
-" path="docs/index.html"

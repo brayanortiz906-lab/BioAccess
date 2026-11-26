@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://brayanortiz906-lab.github.io/BioAccess/sitemap.xml
