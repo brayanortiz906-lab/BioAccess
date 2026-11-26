@@ -3,10 +3,14 @@
 Sistema de control de acceso por huella para PC y celular.
 
 ## Descargas
-- APK movil: ver Releases
-- Pagina del proyecto: https://brayanortiz906-lab.github.io/BioAccess/
+- APK móvil: https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobile.apk
+- Terminal PC (EXE): https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/bioaccess.exe
+- Instalador (EXE): https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessInstaller.exe
+- Simulador móvil UI (EXE): https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobileUI.exe
+- Simulador móvil Web (EXE): https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobileWeb.exe
+- Simulador celular (EXE): https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessPhoneSim.exe
 
-## Documentacion
+## Documentación
 - COMO_FUNCIONA.md
 - COMO_FUNCIONA_CONEXION.md
 - README_BIOACCESS.md
