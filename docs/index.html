@@ -104,7 +104,10 @@ h1 span{color:var(--magenta);text-shadow:0 0 28px var(--magenta)}
 .progress-bar{height:100%;background:linear-gradient(90deg,var(--neon),var(--magenta));box-shadow:0 0 12px rgba(34,211,255,.4)}
 .gallery figure{margin:0;background:rgba(5,14,30,.5);border:1px solid var(--border);border-radius:2px;padding:6px}
 .gallery figcaption{text-align:center;font-size:.75rem;color:var(--muted);margin-top:6px;letter-spacing:1px}
-.gallery img{height:200px;object-fit:cover;width:100%}
+  .gallery img{aspect-ratio:16/9;object-fit:cover;width:100%;height:auto}
+  .gallery figure{position:relative}
+  .gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(180deg,transparent,rgba(2,6,15,.85));color:var(--text);font-size:.78rem;letter-spacing:1px}
+  .lightbox .lb-caption{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:var(--text);font-size:.9rem;letter-spacing:1px;text-shadow:0 0 12px var(--neon);background:rgba(2,6,15,.7);padding:6px 14px;border:1px solid var(--border);border-radius:2px}
 .lightbox{position:fixed;inset:0;background:rgba(2,6,15,.94);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;backdrop-filter:blur(4px)}
 .lightbox img{max-width:92vw;max-height:88vh;border-radius:2px;border:1px solid var(--neon);box-shadow:0 0 44px rgba(34,211,255,.4)}
 .lightbox .close{position:absolute;top:18px;right:24px;color:var(--neon);font-size:2rem;cursor:pointer;text-shadow:0 0 14px var(--neon)}
@@ -371,7 +374,7 @@ v1.0.0 (2026-11-12)
   </aside>
 </div>
 
-<div class="lightbox" id="lightbox"><span class="close" id="lbClose">&times;</span><img id="lbImg" src="" alt=""></div>
+<div class="lightbox" id="lightbox"><span class="close" id="lbClose">&times;</span><img id="lbImg" src="" alt=""><div class="lb-caption" id="lbCap"></div></div>
 
 <script>
 const i18n = {
@@ -469,7 +472,7 @@ document.querySelectorAll('.tabbtn').forEach(btn=>{
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
 document.querySelectorAll('.gallery img').forEach(img=>{
-  img.addEventListener('click',()=>{lbImg.src=img.src; lb.style.display='flex';});
+  img.addEventListener('click',()=>{lbImg.src=img.src; lbImg.alt=img.alt; const cap=document.getElementById('lbCap'); if(cap) cap.textContent=img.alt; lb.style.display='flex';});
 });
 document.getElementById('lbClose').addEventListener('click',()=>{lb.style.display='none';});
 lb.addEventListener('click',e=>{if(e.target===lb) lb.style.display='none';});
