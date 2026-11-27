@@ -31,265 +31,306 @@ body{background:
   radial-gradient(circle at 82% 85%,rgba(255,43,214,.10) 0%,transparent 38%),
   linear-gradient(180deg,#01040a 0%,#02060f 100%)}
 body::before{content:'';position:fixed;inset:0;background:
-  repeating-linear-gradient(0deg,rgba(34,211,255,.035) 0 1px,transparent 1px 3px),
-  linear-gradient(90deg,transparent 0,rgba(34,211,255,.02) 50%,transparent 100%);pointer-events:none;z-index:0}
-body::after{content:'';position:fixed;inset:0;background:
-  linear-gradient(180deg,transparent 0%,rgba(34,211,255,.04) 50%,transparent 100%);
-  animation:scan 7s linear infinite;pointer-events:none;z-index:0;opacity:.5}
-@keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
-.wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:20px 24px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px;background:linear-gradient(90deg,rgba(34,211,255,.05),transparent)}
-.logo{font-weight:900;letter-spacing:3px;font-size:1.25rem;text-shadow:0 0 14px var(--neon)}.logo span{color:var(--neon)}
-.navlinks a{color:var(--muted);text-decoration:none;margin:0 10px;font-size:.85rem;letter-spacing:1px}.navlinks a:hover{color:var(--neon);text-shadow:0 0 10px var(--neon)}
+  repeating-linear-gradient(0deg,rgba(34,211,255,.035) 0 1px,transparent 1px 3px);pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;display:grid;grid-template-areas:"top top top" "side main right";grid-template-columns:220px 1fr 260px;grid-template-rows:auto 1fr;min-height:100vh}
+.topbar{grid-area:top;display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--border);background:rgba(2,6,15,.92)}
+.logo{font-weight:900;letter-spacing:4px;font-size:1.1rem}.logo span{color:var(--neon);text-shadow:0 0 12px var(--neon)}
+.topbar .status{font-size:.8rem;color:var(--orange);letter-spacing:1px}
 .lang-btn{background:rgba(34,211,255,.08);border:1px solid var(--border);color:var(--neon);padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:700;letter-spacing:1px}
-.lang-btn:hover{box-shadow:var(--glow)}
-.hero{padding:60px 0 34px;text-align:center;position:relative;border:1px solid var(--border);border-radius:2px;background:linear-gradient(180deg,rgba(10,16,32,.75),rgba(2,6,15,.85));box-shadow:0 0 34px rgba(34,211,255,.12);overflow:hidden}
+.sidebar{grid-area:side;background:rgba(2,6,15,.92);border-right:1px solid var(--border);padding:18px 12px;display:flex;flex-direction:column;gap:6px}
+.sidebar .title{font-size:1.1rem;font-weight:900;letter-spacing:3px;margin-bottom:2px}.sidebar .title span{color:var(--orange)}
+.sidebar .subtitle{font-size:.7rem;color:rgba(160,225,255,.5);margin-bottom:14px;letter-spacing:1px}
+.nav-btn{display:block;background:transparent;border:1px solid rgba(34,211,255,.2);color:rgba(180,230,255,.7);padding:10px 12px;font-size:.78rem;letter-spacing:2px;text-decoration:none;border-radius:2px;font-weight:700}
+.nav-btn:hover{background:rgba(34,211,255,.12);border-color:var(--neon);color:#eaffff;border-left:4px solid var(--orange)}
+.sidebar .stretch{flex:1}
+.sidebar .info{font-size:.72rem;color:var(--muted);line-height:1.7;margin-top:8px}
+.sidebar .clock{font-size:1.3rem;color:var(--orange);font-weight:700;margin-top:8px}
+.sidebar .btn{display:block;width:100%;padding:8px;border:1px solid var(--border);background:rgba(34,211,255,.06);color:var(--neon);border-radius:2px;cursor:pointer;font-weight:700;letter-spacing:1px;margin-top:6px;font-family:inherit;text-decoration:none;text-align:center}
+.sidebar .btn.orange{border-color:var(--orange);color:var(--orange)}
+.center{grid-area:main;padding:24px 28px;overflow:auto}
+.right{grid-area:right;background:rgba(2,6,15,.88);border-left:1px solid var(--border);padding:18px 12px;display:flex;flex-direction:column;gap:10px}
+.right h3{font-size:.85rem;color:var(--orange);letter-spacing:2px;margin:0}
+.right .log{flex:1;background:rgba(5,14,30,.7);border:1px solid var(--border);border-radius:2px;padding:8px;font-size:.75rem;color:var(--green);overflow:auto;max-height:60vh}
+.right .log div{padding:2px 0;border-bottom:1px solid rgba(34,211,255,.08)}
+.right .box{background:rgba(5,14,30,.7);border:1px solid var(--border);border-radius:2px;padding:10px;font-size:.75rem;color:var(--muted);line-height:1.6}
+.hero{padding:40px 0 24px;text-align:center;position:relative;border:1px solid var(--border);border-radius:2px;background:linear-gradient(180deg,rgba(10,16,32,.75),rgba(2,6,15,.85));box-shadow:0 0 34px rgba(34,211,255,.12);overflow:hidden;margin-bottom:24px}
 #particles{position:absolute;inset:0;opacity:.45;pointer-events:none}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(34,211,255,.14),transparent 45%);pointer-events:none}
-.badge{display:inline-block;padding:6px 12px;border:1px solid var(--neon);border-radius:2px;color:var(--neon);font-size:.72rem;letter-spacing:2px;margin:4px;background:rgba(34,211,255,.06);box-shadow:0 0 12px rgba(34,211,255,.18)}
-h1{font-size:clamp(2.4rem,7vw,4.8rem);margin:18px 0 10px;letter-spacing:4px;text-shadow:0 0 28px var(--neon);font-weight:900}
+.badge{display:inline-block;padding:5px 10px;border:1px solid var(--neon);border-radius:2px;color:var(--neon);font-size:.7rem;letter-spacing:2px;margin:4px;background:rgba(34,211,255,.06)}
+h1{font-size:clamp(2.2rem,6vw,4rem);margin:16px 0 8px;letter-spacing:4px;text-shadow:0 0 28px var(--neon);font-weight:900}
 h1 span{color:var(--magenta);text-shadow:0 0 28px var(--magenta)}
-.lead{max-width:820px;margin:0 auto;color:var(--muted);font-size:1.05rem;line-height:1.7;min-height:3.2em;letter-spacing:.5px}
-.cta{margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.lead{max-width:760px;margin:0 auto;color:var(--muted);font-size:1rem;line-height:1.7;min-height:3.2em;letter-spacing:.5px}
+.cta{margin-top:24px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .btn{padding:12px 24px;border-radius:2px;text-decoration:none;font-weight:700;letter-spacing:2px;transition:.2s;display:inline-block;border:1px solid transparent;cursor:pointer;font-family:inherit}
 .btn.primary{background:linear-gradient(135deg,var(--neon),#00a8ff);color:#001018;box-shadow:0 0 24px rgba(34,211,255,.45);border-color:var(--neon)}
 .btn.ghost{border:1px solid var(--magenta);color:var(--magenta);background:rgba(255,43,214,.06)}
 .btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(34,211,255,.35)}
-.section{margin:74px 0;position:relative}
-.section h2{font-size:1.75rem;letter-spacing:3px;margin-bottom:10px;text-shadow:0 0 16px rgba(255,154,31,.35);color:var(--orange)}
-.section p{color:var(--muted);line-height:1.75;max-width:960px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:26px}
-.card{background:linear-gradient(180deg,rgba(10,16,32,.92),rgba(5,8,18,.92));border:1px solid var(--border);border-radius:2px;padding:20px;position:relative;overflow:hidden;transition:.25s;box-shadow:0 0 18px rgba(34,211,255,.08)}
-.card::before{content:'';position:absolute;top:0;left:0;width:18px;height:18px;border-top:2px solid var(--neon);border-left:2px solid var(--neon)}
-.card::after{content:'';position:absolute;bottom:0;right:0;width:18px;height:18px;border-bottom:2px solid var(--magenta);border-right:2px solid var(--magenta)}
+.section{margin:40px 0;position:relative}
+.section h2{font-size:1.6rem;letter-spacing:3px;margin-bottom:10px;text-shadow:0 0 16px rgba(255,154,31,.35);color:var(--orange)}
+.section p{color:var(--muted);line-height:1.75;max-width:900px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:22px}
+.card{background:linear-gradient(180deg,rgba(10,16,32,.92),rgba(5,8,18,.92));border:1px solid var(--border);border-radius:2px;padding:18px;position:relative;overflow:hidden;transition:.25s;box-shadow:0 0 18px rgba(34,211,255,.08)}
+.card::before{content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:2px solid var(--neon);border-left:2px solid var(--neon)}
+.card::after{content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:2px solid var(--magenta);border-right:2px solid var(--magenta)}
 .card:hover{transform:translateY(-4px);border-color:var(--neon);box-shadow:0 0 26px rgba(34,211,255,.22)}
-.card h3{margin:0 0 8px;color:var(--neon);font-size:1.05rem;letter-spacing:2px}
-.card p{margin:0;font-size:.9rem;color:var(--muted)}
-.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:26px}
-.step{background:rgba(34,211,255,.05);border:1px dashed var(--border);border-radius:2px;padding:16px;text-align:center;position:relative}
-.step .n{font-size:1.7rem;font-weight:900;color:var(--magenta);text-shadow:0 0 14px var(--magenta)}
-.step p{margin:8px 0 0;font-size:.85rem;color:var(--muted)}
-.proto{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:22px}
-.proto .p{background:rgba(255,43,214,.05);border:1px solid rgba(255,43,214,.35);border-radius:2px;padding:16px;box-shadow:0 0 16px rgba(255,43,214,.08)}
+.card h3{margin:0 0 8px;color:var(--neon);font-size:1rem;letter-spacing:2px}
+.card p{margin:0;font-size:.88rem;color:var(--muted)}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:22px}
+.step{background:rgba(34,211,255,.05);border:1px dashed var(--border);border-radius:2px;padding:14px;text-align:center;position:relative}
+.step .n{font-size:1.6rem;font-weight:900;color:var(--magenta);text-shadow:0 0 14px var(--magenta)}
+.step p{margin:8px 0 0;font-size:.82rem;color:var(--muted)}
+.proto{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
+.proto .p{background:rgba(255,43,214,.05);border:1px solid rgba(255,43,214,.35);border-radius:2px;padding:14px;box-shadow:0 0 16px rgba(255,43,214,.08)}
 .proto .p b{color:var(--magenta);letter-spacing:1px}
-.mocks{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;margin-top:26px;align-items:center}
-.term{background:#02060f;border:1px solid var(--neon);border-radius:2px;padding:14px;font-family:Consolas,monospace;font-size:.85rem;box-shadow:0 0 30px rgba(34,211,255,.25);position:relative}
-.term::before{content:'// TERMINAL PC';position:absolute;top:-12px;left:16px;background:var(--bg);padding:0 8px;color:var(--neon);font-size:.75rem;letter-spacing:2px}
-.term .bar{display:flex;gap:6px;margin-bottom:12px}.dot{width:10px;height:10px;border-radius:50%}
+.mocks{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;margin-top:24px;align-items:center}
+.term{background:#02060f;border:1px solid var(--neon);border-radius:2px;padding:14px;font-family:Consolas,monospace;font-size:.84rem;box-shadow:0 0 30px rgba(34,211,255,.25);position:relative}
+.term::before{content:'// TERMINAL PC';position:absolute;top:-11px;left:14px;background:var(--bg);padding:0 8px;color:var(--neon);font-size:.72rem;letter-spacing:2px}
+.term .bar{display:flex;gap:6px;margin-bottom:10px}.dot{width:10px;height:10px;border-radius:50%}
 .red{background:#ff5f56}.yel{background:#ffbd2e}.grn{background:#27c93f}
 .term .line{color:var(--green);line-height:1.8}.term .line span{color:var(--neon)}
 .phone{width:230px;margin:0 auto;background:#050a14;border:2px solid var(--magenta);border-radius:24px;padding:16px;box-shadow:0 0 32px rgba(255,43,214,.32);position:relative}
-.phone::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:70px;height:4px;border-radius:2px;background:rgba(255,43,214,.4)}
-.phone .screen{background:linear-gradient(180deg,#0a1020,#02060f);border-radius:2px;padding:16px;height:320px;overflow:hidden;border:1px solid rgba(34,211,255,.18)}
+.phone .screen{background:linear-gradient(180deg,#0a1020,#02060f);border-radius:16px;padding:16px;height:320px;overflow:hidden;border:1px solid rgba(34,211,255,.18)}
 .phone .title{color:var(--magenta);font-size:.82rem;letter-spacing:2px;margin-bottom:12px;text-shadow:0 0 10px var(--magenta)}
 .phone .hud{height:130px;border:1px solid var(--border);border-radius:2px;margin-bottom:12px;background:radial-gradient(circle at 50% 50%,rgba(34,211,255,.18),transparent 70%);position:relative;overflow:hidden}
 .phone .hud::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(34,211,255,.08) 0 1px,transparent 1px 4px);animation:scan 3s linear infinite}
 .phone .btn{background:linear-gradient(135deg,var(--neon),#00a8ff);color:#001018;padding:10px;border-radius:2px;text-align:center;font-size:.75rem;font-weight:900;letter-spacing:1px;box-shadow:0 0 16px rgba(34,211,255,.3)}
 .links a{color:var(--neon);text-decoration:none;display:block;margin:6px 0;letter-spacing:.5px}.links a:hover{text-decoration:underline;text-shadow:0 0 8px var(--neon)}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:22px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px}
 .gallery img{width:100%;border-radius:2px;border:1px solid var(--border);cursor:pointer;transition:.2s;background:var(--panel2);padding:4px}
 .gallery img:hover{transform:scale(1.02);border-color:var(--neon);box-shadow:0 0 20px rgba(34,211,255,.28)}
 .lightbox{position:fixed;inset:0;background:rgba(2,6,15,.94);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;backdrop-filter:blur(4px)}
 .lightbox img{max-width:92vw;max-height:88vh;border-radius:2px;border:1px solid var(--neon);box-shadow:0 0 44px rgba(34,211,255,.4)}
 .lightbox .close{position:absolute;top:18px;right:24px;color:var(--neon);font-size:2rem;cursor:pointer;text-shadow:0 0 14px var(--neon)}
-.stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px;justify-content:center}
-.stat{background:rgba(34,211,255,.06);border:1px solid var(--border);border-radius:2px;padding:12px 18px;min-width:150px;text-align:center;box-shadow:0 0 16px rgba(34,211,255,.08)}
-.stat b{color:var(--neon);font-size:1.45rem;display:block;text-shadow:0 0 12px var(--neon)}
-.stat span{color:var(--muted);font-size:.8rem;letter-spacing:1px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;justify-content:center}
+.stat{background:rgba(34,211,255,.06);border:1px solid var(--border);border-radius:2px;padding:12px 16px;min-width:140px;text-align:center;box-shadow:0 0 16px rgba(34,211,255,.08)}
+.stat b{color:var(--neon);font-size:1.4rem;display:block;text-shadow:0 0 12px var(--neon)}
+.stat span{color:var(--muted);font-size:.78rem;letter-spacing:1px}
 .arch svg{width:100%;height:auto;filter:drop-shadow(0 0 18px rgba(34,211,255,.18))}
 .arch .node{fill:rgba(10,16,32,.92);stroke:var(--neon);stroke-width:2}
 .arch .label{fill:var(--text);font-size:14px;font-family:Consolas,monospace}
 .arch .line{stroke:var(--magenta);stroke-width:2.5;stroke-dasharray:7 7;animation:dash 1.8s linear infinite}
 @keyframes dash{to{stroke-dashoffset:-28}}
+@keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
 details{background:rgba(34,211,255,.04);border:1px solid var(--border);border-radius:2px;padding:12px 16px;margin:10px 0}
 details summary{cursor:pointer;color:var(--neon);font-weight:700;letter-spacing:1px}
-details pre{white-space:pre-wrap;color:var(--muted);font-size:.84rem;margin-top:10px;line-height:1.6}
+details pre{white-space:pre-wrap;color:var(--muted);font-size:.82rem;margin-top:10px;line-height:1.6}
 .tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
 .tabbtn{background:rgba(34,211,255,.06);border:1px solid var(--border);color:var(--muted);padding:8px 16px;border-radius:2px;cursor:pointer;letter-spacing:1px;font-family:inherit}
 .tabbtn.active{color:var(--neon);border-color:var(--neon);box-shadow:0 0 14px rgba(34,211,255,.22)}
 .tabpanel{display:none}.tabpanel.active{display:block}
-.download-card{background:linear-gradient(180deg,rgba(10,16,32,.92),rgba(5,8,18,.92));border:1px solid var(--border);border-radius:2px;padding:22px;margin-top:18px;box-shadow:0 0 20px rgba(34,211,255,.08)}
-.download-card code{color:var(--green);font-family:Consolas,monospace;font-size:.84rem;text-shadow:0 0 8px rgba(45,255,176,.25)}
-footer{margin:74px 0 20px;text-align:center;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border);padding-top:22px;letter-spacing:1px}
-@media(max-width:860px){.mocks{grid-template-columns:1fr}.hero{padding:42px 0 24px}.wrap{padding:16px}}
-@media (prefers-reduced-motion: reduce){.arch .line,body::after,.phone .hud::after{animation:none}#particles{display:none}}
+.download-card{background:linear-gradient(180deg,rgba(10,16,32,.92),rgba(5,8,18,.92));border:1px solid var(--border);border-radius:2px;padding:20px;margin-top:16px;box-shadow:0 0 20px rgba(34,211,255,.08)}
+.download-card code{color:var(--green);font-family:Consolas,monospace;font-size:.82rem;text-shadow:0 0 8px rgba(45,255,176,.25)}
+footer{margin:40px 0 20px;text-align:center;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);padding-top:18px;letter-spacing:1px}
+@media(max-width:980px){.app{grid-template-columns:1fr;grid-template-areas:"top" "main" "side" "right"}.sidebar,.right{border:none}.mocks{grid-template-columns:1fr}}
+@media (prefers-reduced-motion: reduce){.arch .line,.phone .hud::after,body::before{animation:none}#particles{display:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<nav>
-  <div class="logo">BIO<span>ACCESS</span></div>
-  <div class="navlinks">
-    <a href="#como" data-i18n="nav_how">Cómo funciona</a>
-    <a href="#conecta" data-i18n="nav_conn">Conexión</a>
-    <a href="#arq" data-i18n="nav_arch">Arquitectura</a>
-    <a href="#galeria" data-i18n="nav_gallery">Galería</a>
-    <a href="#docs" data-i18n="nav_docs">Docs</a>
-    <a href="#descargas" data-i18n="nav_downloads">Descargas</a>
-    <a href="https://github.com/brayanortiz906-lab/BioAccess">GitHub</a>
-  </div>
-  <button class="lang-btn" id="langBtn">EN</button>
-</nav>
+<div class="app">
+  <header class="topbar">
+    <div class="logo">BIO<span>ACCESS</span></div>
+    <div class="status" id="clock">00:00:00 · [ ENLACE: ONLINE ]</div>
+    <button class="lang-btn" id="langBtn">EN</button>
+  </header>
 
-<section class="hero">
-  <canvas id="particles"></canvas>
-  <div>
-    <span class="badge" data-i18n="badge1">PC + MÓVIL</span>
-    <span class="badge" data-i18n="badge2">BIOMÉTRICO</span>
-    <span class="badge" data-i18n="badge3">CYBERPUNK</span>
-  </div>
-  <h1>BIO<span>ACCESS</span></h1>
-  <p class="lead" id="typing"></p>
-  <div class="cta">
-    <a class="btn primary" href="https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobile.apk" data-i18n="btn_apk">Descargar APK</a>
-    <a class="btn ghost" href="https://github.com/brayanortiz906-lab/BioAccess" data-i18n="btn_code">Ver código</a>
-  </div>
-  <div class="stats">
-    <div class="stat"><b id="stars">-</b><span data-i18n="stat_stars">Estrellas GitHub</span></div>
-    <div class="stat"><b>v1.0.0</b><span data-i18n="stat_version">Versión actual</span></div>
-    <div class="stat"><b>Android 9+</b><span data-i18n="stat_android">Compatibilidad</span></div>
-  </div>
-</section>
-
-<section class="section" id="que">
-  <h2 data-i18n="sec_what">/ QUÉ ES</h2>
-  <p data-i18n="sec_what_p">BioAccess es un sistema de acceso biométrico que une una terminal de escritorio con un celular. La PC envía una solicitud, el celular captura la huella y, si es válida, la PC concede el acceso.</p>
-  <div class="grid">
-    <div class="card"><h3 data-i18n="card_pc">Terminal PC</h3><p data-i18n="card_pc_p">Interfaz cyberpunk, servidor embebido, vinculación y aprobación de dispositivos.</p></div>
-    <div class="card"><h3 data-i18n="card_mobile">App móvil</h3><p data-i18n="card_mobile_p">Escáner biométrico real o simulado, historial, ajustes y vinculación por QR, código o USB.</p></div>
-    <div class="card"><h3 data-i18n="card_server">Servidor</h3><p data-i18n="card_server_p">FastAPI + WebSocket + descubrimiento UDP para encontrar la PC en la red.</p></div>
-    <div class="card"><h3 data-i18n="card_sim">Simulador</h3><p data-i18n="card_sim_p">Un solo archivo Python que reproduce todo el sistema en una sola PC.</p></div>
-  </div>
-</section>
-
-<section class="section" id="como">
-  <h2 data-i18n="sec_how">/ CÓMO FUNCIONA</h2>
-  <div class="flow">
-    <div class="step"><div class="n">01</div><p data-i18n="step1">La PC inicia el servidor y muestra su IP.</p></div>
-    <div class="step"><div class="n">02</div><p data-i18n="step2">El celular busca la PC en la red.</p></div>
-    <div class="step"><div class="n">03</div><p data-i18n="step3">Se vinculan por QR, código o USB.</p></div>
-    <div class="step"><div class="n">04</div><p data-i18n="step4">La PC solicita huella.</p></div>
-    <div class="step"><div class="n">05</div><p data-i18n="step5">El celular valida y responde.</p></div>
-    <div class="step"><div class="n">06</div><p data-i18n="step6">Acceso concedido o denegado.</p></div>
-  </div>
-</section>
-
-<section class="section" id="conecta">
-  <h2 data-i18n="sec_conn">/ CÓMO SE CONECTA</h2>
-  <p data-i18n="sec_conn_p">La PC detecta automáticamente su IP local. El celular se conecta por los mismos canales:</p>
-  <div class="proto">
-    <div class="p"><b>HTTP</b><br><span data-i18n="proto_http">Sirve la app móvil y los datos de la PC.</span></div>
-    <div class="p"><b>WebSocket</b><br><span data-i18n="proto_ws">Comunicación en tiempo real entre PC y celular.</span></div>
-    <div class="p"><b>UDP 8089</b><br><span data-i18n="proto_udp">Descubrimiento automático de la PC en la LAN.</span></div>
-    <div class="p"><b>QR / Código</b><br><span data-i18n="proto_qr">Vinculación segura con código de 6 caracteres.</span></div>
-  </div>
-</section>
-
-<section class="section" id="arq">
-  <h2 data-i18n="sec_arch">/ ARQUITECTURA</h2>
-  <div class="arch">
-    <svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
-      <rect x="40" y="70" width="180" height="120" rx="14" class="node"/>
-      <text x="130" y="125" text-anchor="middle" class="label">Terminal PC</text>
-      <text x="130" y="148" text-anchor="middle" class="label">PyQt6</text>
-      <rect x="360" y="70" width="180" height="120" rx="14" class="node"/>
-      <text x="450" y="125" text-anchor="middle" class="label">Servidor</text>
-      <text x="450" y="148" text-anchor="middle" class="label">FastAPI / WS</text>
-      <rect x="680" y="70" width="180" height="120" rx="14" class="node"/>
-      <text x="770" y="125" text-anchor="middle" class="label">Celular</text>
-      <text x="770" y="148" text-anchor="middle" class="label">APK / Web</text>
-      <line x1="220" y1="130" x2="360" y2="130" class="line"/>
-      <line x1="540" y1="130" x2="680" y2="130" class="line"/>
-    </svg>
-  </div>
-</section>
-
-<section class="section" id="apariencia">
-  <h2 data-i18n="sec_ui">/ APARIENCIA</h2>
-  <div class="mocks">
-    <div class="term">
-      <div class="bar"><span class="dot red"></span><span class="dot yel"></span><span class="dot grn"></span></div>
-      <div class="line">[ BIOACCESS // TERMINAL PC ]</div>
-      <div class="line"><span>ENLACE:</span> ONLINE</div>
-      <div class="line"><span>CELULAR:</span> VINCULADO</div>
-      <div class="line"><span>IP:</span> auto-detectada</div>
-      <div class="line"><span>ESTADO:</span> LISTO PARA PEDIR HUELLA</div>
+  <aside class="sidebar">
+    <div class="title">BIO<span>ACCESS</span></div>
+    <div class="subtitle">// ESCRITORIO_v2.0</div>
+    <a class="nav-btn" href="#que">&gt; 01. QUÉ ES</a>
+    <a class="nav-btn" href="#como">&gt; 02. CÓMO FUNCIONA</a>
+    <a class="nav-btn" href="#conecta">&gt; 03. CONEXIÓN</a>
+    <a class="nav-btn" href="#arq">&gt; 04. ARQUITECTURA</a>
+    <a class="nav-btn" href="#apariencia">&gt; 05. APARIENCIA</a>
+    <a class="nav-btn" href="#galeria">&gt; 06. GALERÍA</a>
+    <a class="nav-btn" href="#docs">&gt; 07. DOCS</a>
+    <a class="nav-btn" href="#descargas">&gt; 08. DESCARGAS</a>
+    <div class="stretch"></div>
+    <div class="clock" id="sideClock">00:00:00</div>
+    <div class="info" id="sideStatus">
+      [ ENLACE: ONLINE ]<br>IP: auto-detectada<br>CELULAR: VINCULADO
     </div>
-    <div class="phone">
-      <div class="screen">
-        <div class="title">BIOACCESS MOBILE</div>
-        <div class="hud"></div>
-        <div class="btn" data-i18n="btn_scan">MANTENER PARA ESCANEAR</div>
+    <a class="btn" href="https://github.com/brayanortiz906-lab/BioAccess">VINCULAR (QR)</a>
+    <a class="btn orange" href="https://brayanortiz906-lab.github.io/BioAccess/">INTERNET (TUNEL)</a>
+  </aside>
+
+  <main class="center">
+    <section class="hero" id="hero">
+      <canvas id="particles"></canvas>
+      <div>
+        <span class="badge" data-i18n="badge1">PC + MÓVIL</span>
+        <span class="badge" data-i18n="badge2">BIOMÉTRICO</span>
+        <span class="badge" data-i18n="badge3">CYBERPUNK</span>
       </div>
-    </div>
-  </div>
-</section>
+      <h1>BIO<span>ACCESS</span></h1>
+      <p class="lead" id="typing"></p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobile.apk" data-i18n="btn_apk">Descargar APK</a>
+        <a class="btn ghost" href="https://github.com/brayanortiz906-lab/BioAccess" data-i18n="btn_code">Ver código</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="stars">-</b><span data-i18n="stat_stars">Estrellas GitHub</span></div>
+        <div class="stat"><b>v1.0.0</b><span data-i18n="stat_version">Versión actual</span></div>
+        <div class="stat"><b>Android 9+</b><span data-i18n="stat_android">Compatibilidad</span></div>
+      </div>
+    </section>
 
-<section class="section" id="galeria">
-  <h2 data-i18n="sec_gallery">/ GALERÍA</h2>
-  <p data-i18n="sec_gallery_p">Capturas del sistema (interfaz cyberpunk). Haz clic para ampliar.</p>
-  <div class="gallery">
-    <img src="assets/pc-terminal.png" alt="Terminal PC" loading="lazy">
-    <img src="assets/mobile-app.png" alt="App móvil" loading="lazy">
-    <img src="assets/bioaccess-demo.gif" alt="Demo animada" loading="lazy">
-  </div>
-</section>
+    <section class="section" id="que">
+      <h2 data-i18n="sec_what">/ QUÉ ES</h2>
+      <p data-i18n="sec_what_p">BioAccess es un sistema de acceso biométrico que une una terminal de escritorio con un celular. La PC envía una solicitud, el celular captura la huella y, si es válida, la PC concede el acceso.</p>
+      <div class="grid">
+        <div class="card"><h3 data-i18n="card_pc">Terminal PC</h3><p data-i18n="card_pc_p">Interfaz cyberpunk, servidor embebido, vinculación y aprobación de dispositivos.</p></div>
+        <div class="card"><h3 data-i18n="card_mobile">App móvil</h3><p data-i18n="card_mobile_p">Escáner biométrico real o simulado, historial, ajustes y vinculación por QR, código o USB.</p></div>
+        <div class="card"><h3 data-i18n="card_server">Servidor</h3><p data-i18n="card_server_p">FastAPI + WebSocket + descubrimiento UDP para encontrar la PC en la red.</p></div>
+        <div class="card"><h3 data-i18n="card_sim">Simulador</h3><p data-i18n="card_sim_p">Un solo archivo Python que reproduce todo el sistema en una sola PC.</p></div>
+      </div>
+    </section>
 
-<section class="section" id="docs">
-  <h2 data-i18n="sec_docs">/ DOCUMENTACIÓN</h2>
-  <div class="tabs">
-    <button class="tabbtn active" data-tab="readme" data-i18n="tab_readme">README</button>
-    <button class="tabbtn" data-tab="how" data-i18n="tab_how">Cómo funciona</button>
-    <button class="tabbtn" data-tab="conn" data-i18n="tab_conn">Conexión</button>
-  </div>
-  <div class="tabpanel active" id="tab-readme">
-    <details open><summary data-i18n="doc_readme">Manual de uso</summary><pre>python bioaccess.py
+    <section class="section" id="como">
+      <h2 data-i18n="sec_how">/ CÓMO FUNCIONA</h2>
+      <div class="flow">
+        <div class="step"><div class="n">01</div><p data-i18n="step1">La PC inicia el servidor y muestra su IP.</p></div>
+        <div class="step"><div class="n">02</div><p data-i18n="step2">El celular busca la PC en la red.</p></div>
+        <div class="step"><div class="n">03</div><p data-i18n="step3">Se vinculan por QR, código o USB.</p></div>
+        <div class="step"><div class="n">04</div><p data-i18n="step4">La PC solicita huella.</p></div>
+        <div class="step"><div class="n">05</div><p data-i18n="step5">El celular valida y responde.</p></div>
+        <div class="step"><div class="n">06</div><p data-i18n="step6">Acceso concedido o denegado.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="conecta">
+      <h2 data-i18n="sec_conn">/ CÓMO SE CONECTA</h2>
+      <p data-i18n="sec_conn_p">La PC detecta automáticamente su IP local. El celular se conecta por los mismos canales:</p>
+      <div class="proto">
+        <div class="p"><b>HTTP</b><br><span data-i18n="proto_http">Sirve la app móvil y los datos de la PC.</span></div>
+        <div class="p"><b>WebSocket</b><br><span data-i18n="proto_ws">Comunicación en tiempo real entre PC y celular.</span></div>
+        <div class="p"><b>UDP 8089</b><br><span data-i18n="proto_udp">Descubrimiento automático de la PC en la LAN.</span></div>
+        <div class="p"><b>QR / Código</b><br><span data-i18n="proto_qr">Vinculación segura con código de 6 caracteres.</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="arq">
+      <h2 data-i18n="sec_arch">/ ARQUITECTURA</h2>
+      <div class="arch">
+        <svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="70" width="180" height="120" rx="14" class="node"/>
+          <text x="130" y="125" text-anchor="middle" class="label">Terminal PC</text>
+          <text x="130" y="148" text-anchor="middle" class="label">PyQt6</text>
+          <rect x="360" y="70" width="180" height="120" rx="14" class="node"/>
+          <text x="450" y="125" text-anchor="middle" class="label">Servidor</text>
+          <text x="450" y="148" text-anchor="middle" class="label">FastAPI / WS</text>
+          <rect x="680" y="70" width="180" height="120" rx="14" class="node"/>
+          <text x="770" y="125" text-anchor="middle" class="label">Celular</text>
+          <text x="770" y="148" text-anchor="middle" class="label">APK / Web</text>
+          <line x1="220" y1="130" x2="360" y2="130" class="line"/>
+          <line x1="540" y1="130" x2="680" y2="130" class="line"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section" id="apariencia">
+      <h2 data-i18n="sec_ui">/ APARIENCIA</h2>
+      <div class="mocks">
+        <div class="term">
+          <div class="bar"><span class="dot red"></span><span class="dot yel"></span><span class="dot grn"></span></div>
+          <div class="line">[ BIOACCESS // TERMINAL PC ]</div>
+          <div class="line"><span>ENLACE:</span> ONLINE</div>
+          <div class="line"><span>CELULAR:</span> VINCULADO</div>
+          <div class="line"><span>IP:</span> auto-detectada</div>
+          <div class="line"><span>ESTADO:</span> LISTO PARA PEDIR HUELLA</div>
+        </div>
+        <div class="phone">
+          <div class="screen">
+            <div class="title">BIOACCESS MOBILE</div>
+            <div class="hud"></div>
+            <div class="btn" data-i18n="btn_scan">MANTENER PARA ESCANEAR</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeria">
+      <h2 data-i18n="sec_gallery">/ GALERÍA</h2>
+      <p data-i18n="sec_gallery_p">Capturas del sistema (interfaz cyberpunk). Haz clic para ampliar.</p>
+      <div class="gallery">
+        <img src="assets/pc-terminal.png" alt="Terminal PC" loading="lazy">
+        <img src="assets/mobile-app.png" alt="App móvil" loading="lazy">
+        <img src="assets/bioaccess-demo.gif" alt="Demo animada" loading="lazy">
+      </div>
+    </section>
+
+    <section class="section" id="docs">
+      <h2 data-i18n="sec_docs">/ DOCUMENTACIÓN</h2>
+      <div class="tabs">
+        <button class="tabbtn active" data-tab="readme" data-i18n="tab_readme">README</button>
+        <button class="tabbtn" data-tab="how" data-i18n="tab_how">Cómo funciona</button>
+        <button class="tabbtn" data-tab="conn" data-i18n="tab_conn">Conexión</button>
+      </div>
+      <div class="tabpanel active" id="tab-readme">
+        <details open><summary data-i18n="doc_readme">Manual de uso</summary><pre>python bioaccess.py
 python bioaccess_server.py --port 8080
 # APK: ver Releases</pre></details>
-  </div>
-  <div class="tabpanel" id="tab-how">
-    <details open><summary data-i18n="doc_how">Flujo general</summary><pre>1. La PC inicia el servidor
+      </div>
+      <div class="tabpanel" id="tab-how">
+        <details open><summary data-i18n="doc_how">Flujo general</summary><pre>1. La PC inicia el servidor
 2. El celular busca la PC
 3. Se vinculan por QR/código/USB
 4. La PC solicita huella
 5. El celular valida y responde
 6. Acceso concedido o denegado</pre></details>
-  </div>
-  <div class="tabpanel" id="tab-conn">
-    <details open><summary data-i18n="doc_conn">Canales</summary><pre>HTTP: sirve la app y datos
+      </div>
+      <div class="tabpanel" id="tab-conn">
+        <details open><summary data-i18n="doc_conn">Canales</summary><pre>HTTP: sirve la app y datos
 WebSocket: tiempo real
 UDP 8089: descubrimiento
 QR/Código: vinculación segura</pre></details>
-  </div>
-  <div class="links">
-    <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/COMO_FUNCIONA.md">Cómo funciona (completo)</a>
-    <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/COMO_FUNCIONA_CONEXION.md">Cómo se conecta (completo)</a>
-    <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/README_BIOACCESS.md">Manual de uso (completo)</a>
-  </div>
-</section>
+      </div>
+      <div class="links">
+        <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/COMO_FUNCIONA.md">Cómo funciona (completo)</a>
+        <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/COMO_FUNCIONA_CONEXION.md">Cómo se conecta (completo)</a>
+        <a href="https://github.com/brayanortiz906-lab/BioAccess/blob/main/README_BIOACCESS.md">Manual de uso (completo)</a>
+      </div>
+    </section>
 
-<section class="section" id="descargas">
-  <h2 data-i18n="sec_downloads">/ DESCARGAS</h2>
-  <div class="download-card">
-    <p><b data-i18n="dl_version">Versión:</b> v1.0.0</p>
-    <p><b data-i18n="dl_size">Tamaño:</b> ~409 KB</p>
-    <p><b>SHA-256:</b> <code>6f421417d5edcad25d0a594d109a54d91c24b73176d89444cafdab8aebabaa90</code></p>
-    <p data-i18n="dl_steps">Pasos: descarga el APK → instala en Android (permitir orígenes desconocidos) → abre BioAccess → busca la PC.</p>
-    <div class="cta">
-      <a class="btn primary" href="https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobile.apk" data-i18n="btn_apk">Descargar APK</a>
-      <a class="btn ghost" href="https://github.com/brayanortiz906-lab/BioAccess" data-i18n="btn_code">Ver código</a>
+    <section class="section" id="descargas">
+      <h2 data-i18n="sec_downloads">/ DESCARGAS</h2>
+      <div class="download-card">
+        <p><b data-i18n="dl_version">Versión:</b> v1.0.0</p>
+        <p><b data-i18n="dl_size">Tamaño:</b> ~409 KB</p>
+        <p><b>SHA-256:</b> <code>6f421417d5edcad25d0a594d109a54d91c24b73176d89444cafdab8aebabaa90</code></p>
+        <p data-i18n="dl_steps">Pasos: descarga el APK → instala en Android (permitir orígenes desconocidos) → abre BioAccess → busca la PC.</p>
+        <div class="cta">
+          <a class="btn primary" href="https://github.com/brayanortiz906-lab/BioAccess/releases/latest/download/BioAccessMobile.apk" data-i18n="btn_apk">Descargar APK</a>
+          <a class="btn ghost" href="https://github.com/brayanortiz906-lab/BioAccess" data-i18n="btn_code">Ver código</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="referencias">
+      <h2 data-i18n="sec_refs">/ REFERENCIAS</h2>
+      <p data-i18n="sec_refs_p">Desarrollado con Python, PyQt6, FastAPI, uvicorn, WebSockets, qrcode, Android BiometricPrompt, ZXing y PyQt6-WebEngine. Incluye terminal PC, app móvil, servidor embebido, APK nativa, instalador y simulador portable.</p>
+    </section>
+
+    <footer>
+      BioAccess — Terminal Biométrico PC + Móvil · Brayan Alejandro Ortiz Calle
+    </footer>
+  </main>
+
+  <aside class="right">
+    <h3>[ // DIAGNÓSTICO_RED ]</h3>
+    <div class="log" id="logList">
+      <div>▶ SYSTEM INITIALIZED</div>
+      <div>▶ SERVER ONLINE: PORT 8080</div>
+      <div>▶ WAITING FOR PEER...</div>
+      <div>▶ ENCRYPTION KEY LOADED</div>
+      <div>▶ BIOMETRIC MODULE READY</div>
     </div>
-  </div>
-</section>
-
-<section class="section" id="referencias">
-  <h2 data-i18n="sec_refs">/ REFERENCIAS</h2>
-  <p data-i18n="sec_refs_p">Desarrollado con Python, PyQt6, FastAPI, uvicorn, WebSockets, qrcode, Android BiometricPrompt, ZXing y PyQt6-WebEngine. Incluye terminal PC, app móvil, servidor embebido, APK nativa, instalador y simulador portable.</p>
-</section>
-
-<footer>
-  BioAccess — Terminal Biométrico PC + Móvil · Brayan Alejandro Ortiz Calle
-</footer>
+    <h3>[ INFORMACIÓN ]</h3>
+    <div class="box">
+      VERSIÓN: v2.0.1<br>
+      BUILD: 2026.10.29<br>
+      MODO: TERMINAL<br>
+      ACCESO: NIVEL 3
+    </div>
+  </aside>
 </div>
 
 <div class="lightbox" id="lightbox"><span class="close" id="lbClose">&times;</span><img id="lbImg" src="" alt=""></div>
@@ -396,6 +437,14 @@ lb.addEventListener('click',e=>{if(e.target===lb) lb.style.display='none';});
 fetch('https://api.github.com/repos/brayanortiz906-lab/BioAccess')
   .then(r=>r.json()).then(j=>{ const s=document.getElementById('stars'); if (s && typeof j.stargazers_count==='number') s.textContent=j.stargazers_count; })
   .catch(()=>{});
+
+function updateClock(){
+  const d=new Date();
+  const t=d.toLocaleTimeString('es-ES',{hour12:false});
+  const el=document.getElementById('clock'); if(el) el.textContent=t+' · [ ENLACE: ONLINE ]';
+  const sc=document.getElementById('sideClock'); if(sc) sc.textContent=t;
+}
+setInterval(updateClock,1000); updateClock();
 
 applyLang();
 </script>
