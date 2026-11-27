@@ -156,8 +156,8 @@ footer{margin:40px 0 20px;text-align:center;color:var(--muted);font-size:.8rem;b
     <div class="info" id="sideStatus">
       [ ENLACE: ONLINE ]<br>IP: auto-detectada<br>CELULAR: VINCULADO
     </div>
-    <a class="btn" href="https://github.com/brayanortiz906-lab/BioAccess">VINCULAR (QR)</a>
-    <a class="btn orange" href="https://brayanortiz906-lab.github.io/BioAccess/">INTERNET (TUNEL)</a>
+    <a class="btn" href="https://github.com/brayanortiz906-lab/BioAccess">GITHUB</a>
+    <a class="btn orange" href="https://brayanortiz906-lab.github.io/BioAccess/">PÁGINA</a>
   </aside>
 
   <main class="center">
@@ -357,8 +357,8 @@ v1.0.0 (2026-11-12)
     </div>
     <h3>[ INFORMACIÓN ]</h3>
     <div class="box">
-      VERSIÓN: v2.0.1<br>
-      BUILD: 2026.10.29<br>
+      VERSIÓN: v1.1.0<br>
+      BUILD: 2026-11-27<br>
       MODO: TERMINAL<br>
       ACCESO: NIVEL 3
     </div>
@@ -417,11 +417,13 @@ function applyLang() {
   });
   document.getElementById('langBtn').textContent = lang === 'es' ? 'EN' : 'ES';
   document.documentElement.lang = lang;
+  typingText = i18n[lang].typing; ti = 0; typingEl.textContent = '';
+  type();
 }
 document.getElementById('langBtn').addEventListener('click', () => { lang = lang === 'es' ? 'en' : 'es'; applyLang(); });
 
 const typingEl = document.getElementById('typing');
-const typingText = i18n.es.typing;
+let typingText = i18n[lang].typing;
 let ti = 0;
 function type() {
   if (ti <= typingText.length) { typingEl.textContent = typingText.slice(0, ti); ti++; setTimeout(type, 24); }
@@ -495,22 +497,6 @@ if('IntersectionObserver' in window){
   sections.forEach(s=>{ if(s.id) io.observe(s); });
 }
 
-
-// scrollspy: resalta la seccion visible en el menu
-const sections=document.querySelectorAll('main .section, main .hero');
-const navLinks=document.querySelectorAll('.sidebar .nav-btn');
-function setActive(id){
-  navLinks.forEach(a=>{
-    const href=a.getAttribute('href')||'';
-    a.classList.toggle('active', href==='#'+id);
-  });
-}
-if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting) setActive(e.target.id); });
-  },{rootMargin:'-40% 0px -55% 0px',threshold:0});
-  sections.forEach(s=>{ if(s.id) io.observe(s); });
-}
 
 applyLang();
 </script>
