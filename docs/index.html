@@ -25,7 +25,7 @@
   --danger:#ff5f56;--glow:0 0 18px rgba(34,211,255,.35)
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Consolas,'Courier New',monospace;min-height:100vh;overflow-x:hidden}
+html{scroll-behavior:smooth}html{scroll-behavior:smooth}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Consolas,'Courier New',monospace;min-height:100vh;overflow-x:hidden}
 body{background:
   radial-gradient(circle at 18% 8%,rgba(34,211,255,.12) 0%,transparent 34%),
   radial-gradient(circle at 82% 85%,rgba(255,43,214,.10) 0%,transparent 38%),
@@ -42,6 +42,8 @@ body::before{content:'';position:fixed;inset:0;background:
 .sidebar .subtitle{font-size:.7rem;color:rgba(160,225,255,.5);margin-bottom:14px;letter-spacing:1px}
 .nav-btn{display:block;background:transparent;border:1px solid rgba(34,211,255,.2);color:rgba(180,230,255,.7);padding:10px 12px;font-size:.78rem;letter-spacing:2px;text-decoration:none;border-radius:2px;font-weight:700}
 .nav-btn:hover{background:rgba(34,211,255,.12);border-color:var(--neon);color:#eaffff;border-left:4px solid var(--orange)}
+.nav-btn.active{background:rgba(34,211,255,.12);border-color:var(--neon);color:#eaffff;border-left:4px solid var(--orange);box-shadow:0 0 12px rgba(34,211,255,.18)}
+.nav-btn.active{background:rgba(34,211,255,.12);border-color:var(--neon);color:#eaffff;border-left:4px solid var(--orange);box-shadow:0 0 12px rgba(34,211,255,.18)}
 .sidebar .stretch{flex:1}
 .sidebar .info{font-size:.72rem;color:var(--muted);line-height:1.7;margin-top:8px}
 .sidebar .clock{font-size:1.3rem;color:var(--orange);font-weight:700;margin-top:8px}
@@ -128,13 +130,13 @@ footer{margin:40px 0 20px;text-align:center;color:var(--muted);font-size:.8rem;b
 <body>
 <div class="app">
   <header class="topbar">
-    <div class="logo">BIO<span>ACCESS</span></div>
+    <div class="logo"><img src="assets/favicon.png" alt="" style="width:22px;height:22px;vertical-align:middle;margin-right:8px;">BIO<span>ACCESS</span></div>
     <div class="status" id="clock">00:00:00 · [ ENLACE: ONLINE ]</div>
     <button class="lang-btn" id="langBtn">EN</button>
   </header>
 
   <aside class="sidebar">
-    <div class="title">BIO<span>ACCESS</span></div>
+    <div class="title"><img src="assets/favicon.png" alt="" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;">BIO<span>ACCESS</span></div>
     <div class="subtitle">// ESCRITORIO_v2.0</div>
     <a class="nav-btn" href="#que">&gt; 01. QUÉ ES</a>
     <a class="nav-btn" href="#como">&gt; 02. CÓMO FUNCIONA</a>
@@ -446,6 +448,40 @@ function updateClock(){
   const sc=document.getElementById('sideClock'); if(sc) sc.textContent=t;
 }
 setInterval(updateClock,1000); updateClock();
+
+
+// scrollspy: resalta la seccion visible en el menu
+const sections=document.querySelectorAll('main .section, main .hero');
+const navLinks=document.querySelectorAll('.sidebar .nav-btn');
+function setActive(id){
+  navLinks.forEach(a=>{
+    const href=a.getAttribute('href')||'';
+    a.classList.toggle('active', href==='#'+id);
+  });
+}
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) setActive(e.target.id); });
+  },{rootMargin:'-40% 0px -55% 0px',threshold:0});
+  sections.forEach(s=>{ if(s.id) io.observe(s); });
+}
+
+
+// scrollspy: resalta la seccion visible en el menu
+const sections=document.querySelectorAll('main .section, main .hero');
+const navLinks=document.querySelectorAll('.sidebar .nav-btn');
+function setActive(id){
+  navLinks.forEach(a=>{
+    const href=a.getAttribute('href')||'';
+    a.classList.toggle('active', href==='#'+id);
+  });
+}
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) setActive(e.target.id); });
+  },{rootMargin:'-40% 0px -55% 0px',threshold:0});
+  sections.forEach(s=>{ if(s.id) io.observe(s); });
+}
 
 applyLang();
 </script>
