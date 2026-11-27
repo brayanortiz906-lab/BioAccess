@@ -120,7 +120,8 @@ details pre{white-space:pre-wrap;color:var(--muted);font-size:.82rem;margin-top:
 .download-card{background:linear-gradient(180deg,rgba(10,16,32,.92),rgba(5,8,18,.92));border:1px solid var(--border);border-radius:2px;padding:20px;margin-top:16px;box-shadow:0 0 20px rgba(34,211,255,.08)}
 .download-card code{color:var(--green);font-family:Consolas,monospace;font-size:.82rem;text-shadow:0 0 8px rgba(45,255,176,.25)}
 footer{margin:40px 0 20px;text-align:center;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);padding-top:18px;letter-spacing:1px}
-@media(max-width:980px){.app{grid-template-columns:1fr;grid-template-areas:"top" "main" "side" "right"}.sidebar,.right{border:none}.mocks{grid-template-columns:1fr}}
+@media(max-width:980px){.app{grid-template-columns:1fr;grid-template-areas:"top" "side" "main" "right"}.sidebar{flex-direction:row;flex-wrap:wrap;gap:8px;padding:10px;border-right:none;border-bottom:1px solid var(--border)}.sidebar .title,.sidebar .subtitle,.sidebar .stretch,.sidebar .clock,.sidebar .info{display:none}.sidebar .nav-btn{flex:1 1 45%;text-align:center;font-size:.72rem;padding:8px}.sidebar .btn{flex:1 1 45%}.right{border-left:none;border-top:1px solid var(--border)}.mocks{grid-template-columns:1fr}.hero{padding:28px 0 18px}}
+@media(max-width:640px){.topbar{flex-wrap:wrap;gap:8px}.stats{gap:8px}.stat{min-width:110px}.flow{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:1fr}.card{padding:14px}h1{letter-spacing:2px}}
 @media (prefers-reduced-motion: reduce){.arch .line,.phone .hud::after,body::before{animation:none}#particles{display:none}}
 </style>
 </head>
